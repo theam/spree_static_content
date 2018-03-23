@@ -6,7 +6,11 @@ module Spree
     layout :determine_layout
 
     def show
-      @page = Spree::Page.by_store(current_store).visible.find_by!(slug: request.path)
+      path = request.path.dup
+      request_path_split = request.path.split('/')
+      locale = request_path_split[1] if request_path_split.size > 1
+      path.remove!("/#{locale}") if !locale.blank? && (%w(es fr en).include?(locale))
+      @page = Spree::Page.joins(:translations).by_store(current_store).visible.find_by!(slug: path)
     end
 
     private
