@@ -7,9 +7,7 @@ module Spree
 
     def show
       path = request.path.dup
-      request_path = request.path.slice(/^\/\w{2}\//)
-      locale = request_path[1..-2] unless request_path.blank?
-      path.remove!("/#{locale}") if !locale.blank? && (I18n.available_locales.map(&:to_s).include?(locale))
+      I18n.available_locales.each {|locale| path.sub!("/#{locale}", '')}
       @page = Spree::Page.joins(:translations).by_store(current_store).visible.find_by!(slug: path)
     end
 
