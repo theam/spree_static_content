@@ -6,9 +6,7 @@ module Spree
     layout :determine_layout
 
     def show
-      path = request.path.dup
-      I18n.available_locales.each {|locale| path.sub!("/#{locale}", '')}
-      @page = Spree::Page.joins(:translations).by_store(current_store).visible.find_by!(slug: path)
+      @page = Spree::Page.joins(:translations).by_store(current_store).visible.find_by!(slug: "/#{params[:path]}")
     end
 
     private
