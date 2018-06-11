@@ -15,6 +15,8 @@ end
 
 module Spree
   class StaticPage
+    include PagesHelper
+
     def self.matches?(request)
       return false if request.path =~ %r{\A\/+(admin|account|cart|checkout|content|login|pg\/|orders|products|s\/|session|signup|shipments|states|t\/|tax_categories|user)+}
       !Spree::Page.visible.find_by_slug(static_page_slug_with_current_language("/#{request.parameters[:path]}")).nil?
