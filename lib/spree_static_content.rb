@@ -17,7 +17,7 @@ module Spree
   class StaticPage
     def self.matches?(request)
       return false if request.path =~ %r{\A\/+(admin|account|cart|checkout|content|login|pg\/|orders|products|s\/|session|signup|shipments|states|t\/|tax_categories|user)+}
-      Spree::Page.joins(:translations).where(spree_page_translations: { slug: "/#{request.parameters[:path]}" }).any?
+      Spree::Page.visible.joins(:translations).where(spree_page_translations: { slug: "/#{request.parameters[:path]}" }).any?
     end
   end
 end
