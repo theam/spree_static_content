@@ -78,7 +78,7 @@
         <%= f.label :stores, plural_resource_name(Spree::Store) %>
         <% Spree::Store.all.each do |store| %>
           <div class="checkbox">
-            <%= f.label store.name.downcase.to_sym do %>
+            <%= f.label store.name&.downcase&.to_sym do %>
               <%= check_box_tag 'page[store_ids][]', store.id, @page.stores.include?(store) %>
               <%= store.name %>
             <% end %>
