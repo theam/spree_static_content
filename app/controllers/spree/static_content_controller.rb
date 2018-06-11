@@ -2,6 +2,7 @@ module Spree
   class StaticContentController < StoreController
     rescue_from ActiveRecord::RecordNotFound, with: :render_404
 
+    include Spree::PagesHelper
     helper 'spree/products'
     layout :determine_layout
 

@@ -15,7 +15,7 @@ end
 
 module Spree
   class StaticPage
-    include PagesHelper
+    include Spree::PagesHelper
 
     def self.matches?(request)
       return false if request.path =~ %r{\A\/+(admin|account|cart|checkout|content|login|pg\/|orders|products|s\/|session|signup|shipments|states|t\/|tax_categories|user)+}
