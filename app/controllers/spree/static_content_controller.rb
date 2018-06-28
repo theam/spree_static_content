@@ -16,7 +16,7 @@ module Spree
     private
 
     def language_from_locale
-      params[:locale].split("-")&.first || params[:locale]
+      params[:locale]&.split("-")&.first || I18n.locale
     end
 
     def determine_layout
